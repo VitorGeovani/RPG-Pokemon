@@ -1,8 +1,8 @@
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 
-public class RPGFightGame {
-
+public class BlackWindow {
+   
     public static int batalha(Personagem personagem) {
         int i = 1;
         int recorde = 0;
@@ -11,7 +11,7 @@ public class RPGFightGame {
 
         Scanner leitor = new Scanner(System.in);
 
-        while (personagem.hp > 0) {
+        while (personagem.hp > 0 && existemInimigosVivos(inimigos)) {
             Inimigo inimigo = inimigos[rand.nextInt(3)]; // Escolhe um inimigo aleatoriamente
             int ataquesEspeciaisRestantes = personagem.contagemEspecial;
 
@@ -33,32 +33,13 @@ public class RPGFightGame {
                             System.out.println(personagem.getNome() + " aplicou um ataque especial.");
                             inimigo.hp -= 20;
                             ataquesEspeciaisRestantes--;
-                        } else {
-                            System.out.println("Você não possui mais ataques especiais.");
-                        }
+                        } 
                         break;
                     case 3:
-                        System.out.println("Você escolheu recuperar vida.");
-                        int valorCura = rand.nextInt(11); // Valor de cura entre 0 e 10
-                        int palpite;
-                        System.out.print("Tente adivinhar o valor de cura (0-10): ");
-                        try {
-                            palpite = leitor.nextInt();
-                        } catch (java.util.InputMismatchException e) {
-                            palpite = -1;
-                        }
-                        if (palpite == valorCura) {
-                            personagem.hp += 15; // Cura completa se o palpite for correto
-                        } else if (palpite >= 0 && palpite <= 10) {
-                            double porcentagemCura = 0.1 * palpite; // Porcentagem de cura com base no palpite
-                            int cura = (int) (personagem.hp * porcentagemCura);
-                            personagem.hp += cura;
-                        }
-                        System.out.println("Você se curou em " + (personagem.hp - personagem.hpAntes) + " pontos.");
+                        personagem.recuperarVida();
                         break;
                     case 4:
                         personagem.desistir();
-                        System.exit(0);
                         break;
                     default:
                         System.out.println("Opção inválida");
@@ -101,21 +82,33 @@ public class RPGFightGame {
 
             System.out.println("====================");
             System.out.println("Fim da rodada " + i);
-            // System.out.println(personagem.getNome() + " chegou a " + personagem.hp + " pontos de vida.");
 
             if (personagem.hp <= 0) {
                 System.out.println("Você foi derrotado. Fim de jogo.");
+                break; // Encerre a batalha
             }
+
             i++;
 
             if (personagem.hp > recorde) {
                 recorde = personagem.hp;
             }
 
-            // System.out.println("RECORDE ATUAL = " + recorde);
+            System.out.println("RECORDE ATUAL = " + recorde);
         }
         return 0;
     }
+
+    // Método auxiliar para verificar se há inimigos vivos
+    private static boolean existemInimigosVivos(Inimigo[] inimigos) {
+        for (Inimigo inimigo : inimigos) {
+            if (inimigo.hp > 0) {
+                return true; // Pelo menos um inimigo ainda está vivo
+            }
+        }
+        return false; // Todos os inimigos foram derrotados
+    }
+
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
         int continua = 1;
@@ -151,11 +144,13 @@ public class RPGFightGame {
                         break;
                 }
 
+                // Pergunta ao usuário se ele tem certeza da escolha
                 System.out.println("Você escolheu " + personagemEscolhido.getNome() + ". Tem certeza? (1) Sim (2) Não");
                 int escolhaConfirmacao = leitor.nextInt();
                 if (escolhaConfirmacao == 1) {
                     confirmacao = true;
                 } else {
+                    // Se o usuário não tem certeza, permita que ele escolha novamente
                     System.out.println("Escolha um personagem novamente:");
                     System.out.println("(1) Pikachu");
                     System.out.println("(2) Charmander");
@@ -170,11 +165,172 @@ public class RPGFightGame {
             if (pontos > recorde) {
                 recorde = pontos;
             }
-            // System.out.println("RECORDE ATUAL = " + recorde);
+            System.out.println("RECORDE ATUAL = " + recorde);
             System.out.println("Fim de jogo. Deseja continuar? (1) Sim (2) Não");
             continua = leitor.nextInt();
         }
 
         leitor.close();
+    }
+}
+
+class Bulbasaur extends Personagem {
+
+    public Bulbasaur() {
+        super("Bulbasaur");
+        hp = 150;
+        contagemEspecial = 5;
+        desistiu = false;
+    }
+}
+
+class Charmander extends Personagem {
+
+    public Charmander() {
+        super("Charmander");
+        hp = 150;
+        contagemEspecial = 5;
+        desistiu = false;
+    }
+
+}
+
+class Inimigo {
+    String nome;
+    int hp;
+
+    public Inimigo(String nome, int hp) {
+        this.nome = nome;
+        this.hp = hp;
+    }
+
+    public int atacar() {
+        Random gerador = new Random();
+        return gerador.nextInt(3) + 1;
+    }
+}
+
+class Personagem {
+    protected int hp;
+    protected int contagemEspecial;
+    boolean desistiu;
+    private String nome;
+    protected int hpAntes;
+    private boolean usouRecuperacao = false;
+
+    public Personagem(String nome) {
+        hp = 150;
+        contagemEspecial = 5;
+        desistiu = false;
+        this.nome = nome;
+        hpAntes = hp;
+    }
+
+    public int atacar() {
+        Scanner leitor = new Scanner(System.in);
+        System.out.println("Escolha sua ação:");
+        System.out.println("(1) - Ataque Básico");
+        System.out.println("(2) - Ataque Especial");
+        System.out.println("(3) - Recuperar Vida");
+        System.out.println("(4) - Desistir");
+        int escolha = leitor.nextInt();
+
+        switch (escolha) {
+            case 1:
+                // Implemente o ataque básico aqui
+                break;
+            case 2:
+                if (contagemEspecial > 0) {
+                    System.out.println("Você escolheu usar um ataque especial.");
+                    contagemEspecial--; // Reduza a contagem de ataques especiais em 1.
+                    // Implemente o ataque especial aqui
+                } else {
+                    System.out.println("Você não possui mais ataques especiais.");
+                }
+                break;
+            case 3:
+                if (!usouRecuperacao) {
+                    recuperarVida();
+                    usouRecuperacao = true;
+                } 
+                else {
+                    System.out.println("Você já usou a recuperação de vida nesta partida.");
+                }
+                break;
+            case 4:
+                desistir();
+                break;
+            default:
+                System.out.println("Opção inválida");
+                break;
+        }
+
+        return escolha;
+    }
+
+    public void recuperarVida() {
+        Scanner leitor = new Scanner(System.in);
+    
+        if (!usouRecuperacao) {
+            System.out.println("Você escolheu recuperar vida.");
+    
+            // O jogador digita um número de 0 a 10.
+            System.out.print("Digite um número entre 1 e 10 para tentar se recuperar: ");
+            int valorEscolhido = leitor.nextInt();
+    
+            // Gere um valor aleatório entre 0 e o número escolhido.
+            int recuperacao = new Random().nextInt(valorEscolhido * 5) + 1; // Recuperação entre 1 e 50.
+    
+            // Garanta que a recuperação não ultrapasse 50 pontos.
+            if (recuperacao > 50) {
+                recuperacao = 50;
+            }
+    
+            hpAntes = hp;
+            hp += recuperacao;
+    
+            System.out.println("Você se curou em " + recuperacao + " pontos.");
+            usouRecuperacao = true;
+        } else {
+            System.out.println("Você já usou a recuperação!");
+        }
+    }
+
+    public void imprimeHP(int hpUsuario, int hpComputador) {
+        System.out.println("====================");
+        System.out.println("- HP Usuario: " + hpUsuario);
+        System.out.println("- HP Computador: " + hpComputador);
+        System.out.println("* Contagem Especiais: " + contagemEspecial);
+        System.out.println("====================");
+    }
+
+    public void desistir() {
+        desistiu = true;
+        System.out.println("Você desistiu da luta e está fora do Campeonato!");
+        System.exit(0);
+    }
+
+    public String getNome() {
+        return nome;
+    }
+}
+
+class Pikachu extends Personagem {
+
+    public Pikachu() {
+        super("Pikachu");
+        hp = 150;
+        contagemEspecial = 5;
+        desistiu = false;
+    }
+}
+
+class Squirtle extends Personagem {
+
+    public Squirtle() {
+        super("Squirtle");
+        hp = 150;
+        contagemEspecial = 5;
+        desistiu = false;
     }
 }
