@@ -2,9 +2,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class BlackWindow {
-   
+
     public static int batalha(Personagem personagem) {
-        int i = 1;
+        int rodadas = 0;
         int recorde = 0;
         Random rand = new Random();
         Inimigo[] inimigos = {new Inimigo("Inimigo 1", 200), new Inimigo("Inimigo 2", 150), new Inimigo("Inimigo 3", 100)};
@@ -12,11 +12,12 @@ public class BlackWindow {
         Scanner leitor = new Scanner(System.in);
 
         while (personagem.hp > 0 && existemInimigosVivos(inimigos)) {
-            Inimigo inimigo = inimigos[rand.nextInt(3)]; // Escolhe um inimigo aleatoriamente
+            rodadas++;
+            Inimigo inimigo = inimigos[rand.nextInt(3)];
             int ataquesEspeciaisRestantes = personagem.contagemEspecial;
 
             System.out.println("====================");
-            System.out.println("RODADA " + i);
+            System.out.println("RODADA " + rodadas);
             System.out.println("====================\n");
 
             while (personagem.hp > 0 && inimigo.hp > 0) {
@@ -25,15 +26,19 @@ public class BlackWindow {
 
                 switch (escolha) {
                     case 1:
-                        System.out.println(personagem.getNome() + " aplicou um ataque básico.");
-                        inimigo.hp -= 7;
+                        int danoBasico = 10;
+                        System.out.println(personagem.getNome() + " aplicou um ataque básico causando " + danoBasico + " de dano.");
+                        inimigo.hp -= danoBasico;
                         break;
                     case 2:
                         if (ataquesEspeciaisRestantes > 0) {
-                            System.out.println(personagem.getNome() + " aplicou um ataque especial.");
-                            inimigo.hp -= 20;
+                            int danoEspecial = 20;
+                            System.out.println(personagem.getNome() + " aplicou um ataque especial causando " + danoEspecial + " de dano.");
+                            inimigo.hp -= danoEspecial;
                             ataquesEspeciaisRestantes--;
-                        } 
+                        } else {
+                            System.out.println("Você não possui mais ataques especiais.");
+                        }
                         break;
                     case 3:
                         personagem.recuperarVida();
@@ -48,20 +53,9 @@ public class BlackWindow {
 
                 if (inimigo.hp > 0) {
                     int escolhaInimigo = inimigo.atacar();
-                    switch (escolhaInimigo) {
-                        case 1:
-                            System.out.println(inimigo.nome + " aplicou um soco.");
-                            personagem.hp -= 2 + (int) (i / 10);
-                            break;
-                        case 2:
-                            System.out.println(inimigo.nome + " aplicou um chute.");
-                            personagem.hp -= 3 + (int) (i / 10);
-                            break;
-                        case 3:
-                            System.out.println(inimigo.nome + " aplicou um ataque especial.");
-                            personagem.hp -= 4 + (int) (i / 20);
-                            break;
-                    }
+                    int danoComputador = (int) (escolhaInimigo * 2.2);
+                    System.out.println(inimigo.nome + " aplicou um ataque. O computador causou " + danoComputador + " de dano.");
+                    personagem.hp -= danoComputador;
                 } else {
                     System.out.println(inimigo.nome + " derrotado");
                 }
@@ -72,7 +66,7 @@ public class BlackWindow {
                 if (personagem.hp > 150) {
                     personagem.hp = 150;
                 }
-                if (i % 10 == 0) {
+                if (rodadas % 10 == 0) {
                     ataquesEspeciaisRestantes++;
                     if (ataquesEspeciaisRestantes > 5) {
                         ataquesEspeciaisRestantes = 5;
@@ -81,32 +75,28 @@ public class BlackWindow {
             }
 
             System.out.println("====================");
-            System.out.println("Fim da rodada " + i);
+            System.out.println("Fim da rodada " + rodadas);
 
             if (personagem.hp <= 0) {
                 System.out.println("Você foi derrotado. Fim de jogo.");
-                break; // Encerre a batalha
+                break;
             }
-
-            i++;
 
             if (personagem.hp > recorde) {
                 recorde = personagem.hp;
             }
-
-            System.out.println("RECORDE ATUAL = " + recorde);
+            System.out.println("RECORDE ATUAL DE VIDA = " + recorde + " hp");
         }
         return 0;
     }
 
-    // Método auxiliar para verificar se há inimigos vivos
     private static boolean existemInimigosVivos(Inimigo[] inimigos) {
         for (Inimigo inimigo : inimigos) {
             if (inimigo.hp > 0) {
-                return true; // Pelo menos um inimigo ainda está vivo
+                return true;
             }
         }
-        return false; // Todos os inimigos foram derrotados
+        return false;
     }
 
     public static void main(String[] args) {
@@ -144,13 +134,11 @@ public class BlackWindow {
                         break;
                 }
 
-                // Pergunta ao usuário se ele tem certeza da escolha
                 System.out.println("Você escolheu " + personagemEscolhido.getNome() + ". Tem certeza? (1) Sim (2) Não");
                 int escolhaConfirmacao = leitor.nextInt();
                 if (escolhaConfirmacao == 1) {
                     confirmacao = true;
                 } else {
-                    // Se o usuário não tem certeza, permita que ele escolha novamente
                     System.out.println("Escolha um personagem novamente:");
                     System.out.println("(1) Pikachu");
                     System.out.println("(2) Charmander");
@@ -165,17 +153,14 @@ public class BlackWindow {
             if (pontos > recorde) {
                 recorde = pontos;
             }
-            System.out.println("RECORDE ATUAL = " + recorde);
             System.out.println("Fim de jogo. Deseja continuar? (1) Sim (2) Não");
             continua = leitor.nextInt();
         }
-
         leitor.close();
     }
 }
 
 class Bulbasaur extends Personagem {
-
     public Bulbasaur() {
         super("Bulbasaur");
         hp = 150;
@@ -185,14 +170,12 @@ class Bulbasaur extends Personagem {
 }
 
 class Charmander extends Personagem {
-
     public Charmander() {
         super("Charmander");
         hp = 150;
         contagemEspecial = 5;
         desistiu = false;
     }
-
 }
 
 class Inimigo {
@@ -237,13 +220,11 @@ class Personagem {
 
         switch (escolha) {
             case 1:
-                // Implemente o ataque básico aqui
                 break;
             case 2:
                 if (contagemEspecial > 0) {
                     System.out.println("Você escolheu usar um ataque especial.");
-                    contagemEspecial--; // Reduza a contagem de ataques especiais em 1.
-                    // Implemente o ataque especial aqui
+                    contagemEspecial--;
                 } else {
                     System.out.println("Você não possui mais ataques especiais.");
                 }
@@ -252,8 +233,7 @@ class Personagem {
                 if (!usouRecuperacao) {
                     recuperarVida();
                     usouRecuperacao = true;
-                } 
-                else {
+                } else {
                     System.out.println("Você já usou a recuperação de vida nesta partida.");
                 }
                 break;
@@ -270,25 +250,17 @@ class Personagem {
 
     public void recuperarVida() {
         Scanner leitor = new Scanner(System.in);
-    
+
         if (!usouRecuperacao) {
             System.out.println("Você escolheu recuperar vida.");
-    
-            // O jogador digita um número de 0 a 10.
             System.out.print("Digite um número entre 1 e 10 para tentar se recuperar: ");
             int valorEscolhido = leitor.nextInt();
-    
-            // Gere um valor aleatório entre 0 e o número escolhido.
-            int recuperacao = new Random().nextInt(valorEscolhido * 5) + 1; // Recuperação entre 1 e 50.
-    
-            // Garanta que a recuperação não ultrapasse 50 pontos.
+            int recuperacao = new Random().nextInt(valorEscolhido * 5) + 1;
             if (recuperacao > 50) {
                 recuperacao = 50;
             }
-    
             hpAntes = hp;
             hp += recuperacao;
-    
             System.out.println("Você se curou em " + recuperacao + " pontos.");
             usouRecuperacao = true;
         } else {
@@ -316,7 +288,6 @@ class Personagem {
 }
 
 class Pikachu extends Personagem {
-
     public Pikachu() {
         super("Pikachu");
         hp = 150;
@@ -326,7 +297,6 @@ class Pikachu extends Personagem {
 }
 
 class Squirtle extends Personagem {
-
     public Squirtle() {
         super("Squirtle");
         hp = 150;
