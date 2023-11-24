@@ -276,9 +276,9 @@ class Personagem {
 
     public void imprimeHP(int hpUsuario, int hpComputador) {
         System.out.println("====================");
-        System.out.println("- HP Usuario: " + hpUsuario);
-        System.out.println("- HP Computador: " + hpComputador);
-        System.out.println("* Contagem Especiais: " + contagemEspecial);
+        System.out.println("- HP Usuário: " + hpUsuario);
+        System.out.println("- HP Inimigo: " + hpComputador);
+        System.out.println("* Contagem de Especiais: " + contagemEspecial);
         System.out.println("====================");
     }
 
