@@ -44,7 +44,7 @@
 <br>
 
 ## <a name="ImagensDoProjeto"></a>🖥 Preview do projeto
-* <b>Jogo</b> sendo executado pelo Visual Studio Code
+* <b>Jogo</b> sendo executado pelo Visual Studio Code:
 <img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/96cfa3da-8301-431b-b858-1f47020bdefa" width="300px" />
 
 
