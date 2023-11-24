@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/e26c1b82-c9cd-4afd-a9c4-fd7233f1cde6" width="300px" />
+  <img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/e26c1b82-c9cd-4afd-a9c4-fd7233f1cde6" width="200px" />
 </div>
 
 <h1 align="center">Pokémon: Black Window</h1>
