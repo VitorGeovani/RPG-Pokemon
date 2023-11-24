@@ -1,29 +1,43 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlackWindow {
+
+    public static Inimigo[] remove(Inimigo inimigo, Inimigo[] inimigos) {
+        if (inimigos.length == 0) {
+            return inimigos;
+        }
+    
+        int length = inimigos.length - 1;
+        Inimigo[] novosInimigos = new Inimigo[length];
+    
+        for (int i = 0, j = 0; i < inimigos.length; i++) {
+            if (inimigos[i] != inimigo) {
+                novosInimigos[j++] = inimigos[i];
+            }
+        }
+    
+        return novosInimigos;
+    }
 
     public static int batalha(Personagem personagem) {
         int rodadas = 0;
         int recorde = 0;
         Random rand = new Random();
-        Inimigo[] inimigos = {new Inimigo("Inimigo 1", 200), new Inimigo("Inimigo 2", 150), new Inimigo("Inimigo 3", 100)};
-
+        Inimigo[] inimigos = {new Inimigo("Sinnoh", 100), new Inimigo("Kalos", 150), new Inimigo("Alola", 200)};
+    
         Scanner leitor = new Scanner(System.in);
-
+    
         while (personagem.hp > 0 && existemInimigosVivos(inimigos)) {
             rodadas++;
-            Inimigo inimigo = inimigos[rand.nextInt(3)];
-            int ataquesEspeciaisRestantes = personagem.contagemEspecial;
-
-            System.out.println("====================");
-            System.out.println("RODADA " + rodadas);
-            System.out.println("====================\n");
-
+            Inimigo inimigo = inimigos[rand.nextInt(inimigos.length)];
+    
             while (personagem.hp > 0 && inimigo.hp > 0) {
                 personagem.imprimeHP(personagem.hp, inimigo.hp);
                 int escolha = personagem.atacar();
-
+    
                 switch (escolha) {
                     case 1:
                         int danoBasico = 10;
@@ -31,11 +45,11 @@ public class BlackWindow {
                         inimigo.hp -= danoBasico;
                         break;
                     case 2:
-                        if (ataquesEspeciaisRestantes > 0) {
+                        if (personagem.contagemEspecial > 0) {
                             int danoEspecial = 20;
                             System.out.println(personagem.getNome() + " aplicou um ataque especial causando " + danoEspecial + " de dano.");
                             inimigo.hp -= danoEspecial;
-                            ataquesEspeciaisRestantes--;
+                            personagem.contagemEspecial--;
                         } else {
                             System.out.println("Você não possui mais ataques especiais.");
                         }
@@ -50,43 +64,35 @@ public class BlackWindow {
                         System.out.println("Opção inválida");
                         break;
                 }
-
-                if (inimigo.hp > 0) {
+    
+                if (inimigo.hp <= 0) {
+                    inimigos = remove(inimigo, inimigos);
+                    System.out.println(inimigo.nome + " derrotado");
+                } else {
                     int escolhaInimigo = inimigo.atacar();
                     int danoComputador = (int) (escolhaInimigo * 2.2);
-                    System.out.println(inimigo.nome + " aplicou um ataque. O computador causou " + danoComputador + " de dano.");
+                    System.out.println(inimigo.nome + " aplicou um ataque causando " + danoComputador + " de dano.");
                     personagem.hp -= danoComputador;
-                } else {
-                    System.out.println(inimigo.nome + " derrotado");
                 }
             }
-
+    
             if (personagem.hp > 0) {
                 personagem.hp += 5;
                 if (personagem.hp > 150) {
                     personagem.hp = 150;
                 }
                 if (rodadas % 10 == 0) {
-                    ataquesEspeciaisRestantes++;
-                    if (ataquesEspeciaisRestantes > 5) {
-                        ataquesEspeciaisRestantes = 5;
+                    personagem.contagemEspecial++;
+                    if (personagem.contagemEspecial > 5) {
+                        personagem.contagemEspecial = 5;
                     }
                 }
             }
-
+    
             System.out.println("====================");
             System.out.println("Fim da rodada " + rodadas);
-
-            if (personagem.hp <= 0) {
-                System.out.println("Você foi derrotado. Fim de jogo.");
-                break;
-            }
-
-            if (personagem.hp > recorde) {
-                recorde = personagem.hp;
-            }
-            System.out.println("RECORDE ATUAL DE VIDA = " + recorde + " hp");
         }
+    
         return 0;
     }
 
