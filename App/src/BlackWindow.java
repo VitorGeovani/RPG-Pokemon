@@ -21,7 +21,8 @@ public class BlackWindow {
             System.err.println("Erro ao ler o arquivo de banner: " + e.getMessage());
         }
     }
-    // Função para exibir o banner
+    
+    // Função para exibir o banner de agradecimento
     private static void exibirBannerAgradecimento() {
         try (BufferedReader br = new BufferedReader(new FileReader("./App/src/banner-agradecimento.txt"))) {
             String line;
