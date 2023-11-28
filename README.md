@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/e26c1b82-c9cd-4afd-a9c4-fd7233f1cde6" width="300px" />
+  <img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/e26c1b82-c9cd-4afd-a9c4-fd7233f1cde6" width="200px" />
 </div>
 
 <h1 align="center">Pokémon: Black Window</h1>
@@ -44,7 +44,7 @@
 <br>
 
 ## <a name="ImagensDoProjeto"></a>🖥 Preview do projeto
-* <b>Jogo</b> sendo executado pelo Visual Studio Code
+* Jogo sendo executado pelo <b>Visual Studio Code</b>:
 <img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/96cfa3da-8301-431b-b858-1f47020bdefa" width="300px" />
 
 
