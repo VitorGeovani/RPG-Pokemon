@@ -2,9 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,19 +11,6 @@ public class BlackWindow {
 
     // Função para exibir o banner
     private static void exibirBanner() {
-        // try {
-        // //     File bannerFile = new File("./App/src/banner.txt");
-        // //     Scanner scanner = new Scanner(bannerFile);
-
-        // //     while (scanner.hasNextLine()) {
-        // //         System.out.println(scanner.nextLine());
-        // //     }
-
-        // //     scanner.close();
-        // // } catch (FileNotFoundException e) {
-        // //     System.out.println("Erro ao ler o arquivo de banner: " + e.getMessage());
-        // // }
-
         try (BufferedReader br = new BufferedReader(new FileReader("./App/src/banner.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -36,7 +20,18 @@ public class BlackWindow {
         } catch (IOException | InterruptedException e) {
             System.err.println("Erro ao ler o arquivo de banner: " + e.getMessage());
         }
-
+    }
+    // Função para exibir o banner
+    private static void exibirBannerAgradecimento() {
+        try (BufferedReader br = new BufferedReader(new FileReader("./App/src/banner-agradecimento.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                TimeUnit.MILLISECONDS.sleep(100);
+            }
+        } catch (IOException | InterruptedException e) {
+            System.err.println("Erro ao ler o arquivo de banner: " + e.getMessage());
+        }
     }
 
     // Função para remover um inimigo do array de inimigos
@@ -207,7 +202,7 @@ public class BlackWindow {
             continua = leitor.nextInt();
 
             if (continua != 1) {
-                exibirBanner();
+                exibirBannerAgradecimento();
             }
         }
     }
