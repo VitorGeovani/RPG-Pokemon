@@ -19,6 +19,19 @@
  O Pokémon: Black Window é um projeto inspirado no universo de Pokémon, que permite que os jogadores controlem um dos quatro personagens jogáveis (<b>Bulbasaur, Charmander, Pikachu ou Squirtle</b>) em batalhas contra inimigos controlados pelo computador. O objetivo do jogo é derrotar os inimigos e manter o personagem jogável com a maior quantidade possível de pontos de vida (HP).
  <br>
 
+## <a name="SobreoProjeto"></a>:pushpin: Funcionalidades
+    - Escolha seu personagem entre Pikachu, Charmander, Squirtle e Bulbasaur.
+    - Enfrente inimigos em batalhas baseadas em turnos.
+    - Utilize ataques básicos, especiais e recuperação de vida durante as batalhas.
+    - O jogo mantém um recorde da pontuação de vida mais alta alcançada.
+
+## <a name="SobreoProjeto"></a>🎮 Como Jogar
+    1. Execute o programa Java no console.
+    2. Escolha um personagem digitando o número correspondente.
+    3. Enfrente inimigos em batalhas automáticas.
+    4. Escolha suas ações durante a batalha.
+    5. Continue jogando ou encerre o jogo.
+
  ## <a name="RecursosUtilizadosNesteProjeto"></a>⚒ Recursos utilizados neste projeto
 <table align="center">
 <th><h3>Linguagem</h3></th>
@@ -63,7 +76,7 @@
 
 ## <a name="ImagensDoProjeto"></a>🖥 Preview do projeto
 * Jogo sendo executado pelo <b>Visual Studio Code</b>:
-<img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/96cfa3da-8301-431b-b858-1f47020bdefa" width="300px" />
+<img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/c719243f-7428-4acd-ba2e-d2e73459a635" width="500px" />
 
 
 ## ⌨ Como executar o projeto
@@ -75,3 +88,7 @@ Baixe o arquivo <b>.ZIP</b> do projeto e após descompactar execute o arquivo <b
 ## <a href="https://github.com/Squad-Back-End/reprography-nodejs/blob/master/LICENSE">📝</a> <a name="Licenca"></a> Licença
 
 Este projeto está sobre a licença MIT.
+
+<div align="center">
+  <sub><b>© 2023 Pokémon: Black Window</b></sub>
+</div>
