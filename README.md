@@ -21,7 +21,8 @@
 
  ## <a name="RecursosUtilizadosNesteProjeto"></a>⚒ Recursos utilizados neste projeto
 <table align="center">
-
+<th><h3>Linguagem</h3></th>
+ <th><h3>IDE</h3></th>
   <tr>
       <td valign="top" align="center">
       <a href="https://www.java.com/pt-BR/download/ie_manual.jsp?locale=pt_BR"><img height="80" width="80" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" style="max-width:100%;"></img></a>
@@ -43,6 +44,23 @@
 
 <br>
 
+## <a name="Desenvolvedores"></a> :rocket: Desenvolvedores :octocat:
+<table align="center">
+  <tr>
+    <td align="center"><a href="https://github.com/VitorGeovani">
+    <img src="https://avatars.githubusercontent.com/u/71882193?v=4" width="100px" alt="Imagem do perfil do Vitor"/>
+    <br />
+     <sub><b>Vitor</b></sub><br />
+     </td>
+    <td align="center"><a href="https://github.com/https://github.com/pudimpudi">
+    <img src="https://avatars.githubusercontent.com/u/127544518?v=4" width="100px" alt="Imagem do perfil da Gabi"/>
+    <br />
+    <sub><b>Gabrielle</b></sub><br />
+     </td>
+ </tr>
+</table>
+
+
 ## <a name="ImagensDoProjeto"></a>🖥 Preview do projeto
 * Jogo sendo executado pelo <b>Visual Studio Code</b>:
 <img src="https://github.com/VitorGeovani/RPG-Pokemon/assets/71882193/96cfa3da-8301-431b-b858-1f47020bdefa" width="300px" />
@@ -53,3 +71,7 @@
 Baixe o arquivo <b>.ZIP</b> do projeto e após descompactar execute o arquivo <b>BlackWindow.java</b>
 
 ---
+
+## <a href="https://github.com/Squad-Back-End/reprography-nodejs/blob/master/LICENSE">📝</a> <a name="Licenca"></a> Licença
+
+Este projeto está sobre a licença MIT.
