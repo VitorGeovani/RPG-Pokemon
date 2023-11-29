@@ -21,7 +21,8 @@
 
  ## <a name="RecursosUtilizadosNesteProjeto"></a>⚒ Recursos utilizados neste projeto
 <table align="center">
-
+<th><h3>Linguagem</h3></th>
+ <th><h3>IDE</h3></th>
   <tr>
       <td valign="top" align="center">
       <a href="https://www.java.com/pt-BR/download/ie_manual.jsp?locale=pt_BR"><img height="80" width="80" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" style="max-width:100%;"></img></a>
