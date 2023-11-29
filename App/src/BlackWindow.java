@@ -10,7 +10,7 @@ public class BlackWindow {
     static Scanner leitor = new Scanner(System.in);
 
     // Função para exibir o banner
-    private static void exibirBanner() {
+    public static void exibirBanner() {
         try (BufferedReader br = new BufferedReader(new FileReader("./App/src/banner.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -23,7 +23,7 @@ public class BlackWindow {
     }
     
     // Função para exibir o banner de agradecimento
-    private static void exibirBannerAgradecimento() {
+    public static void exibirBannerAgradecimento() {
         try (BufferedReader br = new BufferedReader(new FileReader("./App/src/banner-agradecimento.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -127,7 +127,7 @@ public class BlackWindow {
     }
 
     // Função para verificar se existem inimigos vivos
-    private static boolean existemInimigosVivos(Inimigo[] inimigos) {
+    public static boolean existemInimigosVivos(Inimigo[] inimigos) {
         for (Inimigo inimigo : inimigos) {
             if (inimigo.hp > 0) {
                 return true;
