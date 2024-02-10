@@ -65,7 +65,7 @@
     <br />
      <sub><b>Vitor</b></sub><br />
      </td>
-    <td align="center"><a href="https://github.com/https://github.com/pudimpudi">
+    <td align="center"><a href="https://github.com/pudimpudi">
     <img src="https://avatars.githubusercontent.com/u/127544518?v=4" width="100px" alt="Imagem do perfil da Gabi"/>
     <br />
     <sub><b>Gabrielle</b></sub><br />
