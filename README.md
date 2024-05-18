@@ -85,7 +85,7 @@ Baixe o arquivo <b>.ZIP</b> do projeto e após descompactar execute o arquivo <b
 
 ---
 
-## <a href="https://github.com/Squad-Back-End/reprography-nodejs/blob/master/LICENSE">📝</a> <a name="Licenca"></a> Licença
+## <a href="">📝</a> <a name="Licenca"></a> Licença
 
 Este projeto está sobre a licença MIT.
 
